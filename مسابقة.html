@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>انضم إلى المسابقة</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 100%;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  }
+  .icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    color: #1e3c72;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  p.desc {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  button {
+    background: linear-gradient(135deg, #ff6a00, #ee0979);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 17px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: transform 0.15s ease;
+  }
+  button:active { transform: scale(0.97); }
+
+  #result {
+    display: none;
+    margin-top: 25px;
+    text-align: right;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .success-msg {
+    background: #eafaf1;
+    border: 1px solid #27ae60;
+    color: #1e7e45;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .instructions {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 12px;
+    line-height: 1.8;
+  }
+  .copy-box {
+    background: #f4f6f8;
+    border: 1px dashed #999;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 14px;
+    color: #222;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    margin-bottom: 12px;
+  }
+  .copy-btn {
+    background: #1e3c72;
+    padding: 12px;
+    font-size: 15px;
+  }
+  .copy-btn.copied {
+    background: #27ae60;
+  }
+  .send-note {
+    font-size: 13px;
+    color: #777;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div id="joinSection">
+    <div class="icon">🎁</div>
+    <h1>مسابقة حصرية للمتابعين!</h1>
+    <p class="desc">
+      اضغط على الزر أدناه للانضمام إلى المسابقة والحصول على فرصتك للفوز 🎉
+    </p>
+    <button onclick="joinContest()">✅ انضم إلى المسابقة</button>
+  </div>
+
+  <div id="result">
+    <div class="success-msg">🎉 تم انضمامك إلى المسابقة بنجاح!</div>
+    <div class="instructions">
+      لإتمام المشاركة، قم بنسخ النص التالي وإرساله إلى <b>مكتب القمة</b> لتأكيد دخولك في المسابقة:
+    </div>
+    <div class="copy-box" id="copyText">أرغب بالمشاركة في المسابقة، وقد انضممت من خلال الرابط الرسمي. الرجاء تأكيد اشتراكي 🎁</div>
+    <button class="copy-btn" id="copyBtn" onclick="copyText()">📋 نسخ النص</button>
+    <div class="send-note">بعد النسخ، أرسل النص عبر تلغرام إلى مكتب القمة لإتمام التسجيل.</div>
+  </div>
+</div>
+
+<script>
+function joinContest() {
+  document.getElementById('joinSection').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+}
+
+function copyText() {
+  const text = document.getElementById('copyText').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.innerText = '✅ تم النسخ';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = '📋 نسخ النص';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
